@@ -93,4 +93,25 @@ end
 },
 'rcarriga/nvim-dap-ui',
 'mfussenegger/nvim-dap-python',
+{ 
+	'RaafatTurki/corn.nvim',
+	config = function()
+		vim.diagnostic.config {virtual_text = false}
+		local corn_scope = "line"
+		local toggle_corn_scope = function()
+			if corn_scope == "line" then	
+				corn_scope = "file"	
+			else	
+				corn_scope = "line"	
+			end	
+			require('corn').scope(corn_scope)
+			
+		end
+		require('corn').setup({
+			on_toggle= function(is_hidden)
+				vim.diagnostic.config({virtual_text = not vim.diagnostic.config().virtual_text})
+			end
+			})
+		end
+},
 })
