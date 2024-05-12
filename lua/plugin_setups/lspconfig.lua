@@ -1,8 +1,5 @@
 require('mason').setup()
 require('mason-lspconfig').setup()
-require('lspconfig').pyright.setup{}
-require('lspconfig').rust_analyzer.setup{}
-require('lspconfig').tsserver.setup{}
 require('completion_setup')
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local opts = { noremap=true, silent=true }
@@ -34,7 +31,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+	vim.keymap.set('n', '<space>f', function()
+		vim.lsp.buf.format({})
+	end, bufopts)
 	-- Toggle the aerial window with <leader>a
 	--require('aerial').on_attach(client,bufnr)
 end
@@ -93,28 +92,74 @@ require('lspconfig')['lua_ls'].setup({
 	end
 }
 )
-require('lspconfig')['rust_analyzer'].setup{
+require('lspconfig')['marksman'].setup{
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
-	-- Server-specific settings...
-	settings = {
-		["rust-analyzer"] = {
-			imports = {
-				granularity = {
-					group = "module",
-				},
-				prefix = "self",
-			},
-			cargo = {
-				buildScripts = {
-					enable = true,
-				},
-			},
-			procMacro = {
-				enable = true
-			},
-		}
+}
+local rt = require('rust-tools')
+local rust_on_attach = function(client,bufnr)
+	on_attach(client,bufnr)
+	local bufopts = { noremap=true, silent=true, buffer=bufnr }
+	vim.keymap.set("n", "<leader>ha", rt.hover_actions.hover_actions, bufopts)
+	vim.keymap.set("n", "<leader>hg", rt.code_action_group.code_action_group, bufopts)
+end
+rt.setup{
+	tools={
+		hover_actions= {
+			auto_focus=true,
+		},
+	},
+	server = {
+			on_attach = rust_on_attach,
+			capabilities=capabilities,
+			lsp_flags=lsp_flags,
+			settings = {
+				["rust-analyzer"] = {
+					imports = {
+						granularity = {
+							group = "module",
+						},
+						prefix = "self",
+					},
+					cargo = {
+						buildScripts = {
+							enable = true,
+						},
+					},
+					procMacro = {
+						enable = true
+					},
+				}
+			}
 	}
 }
-
+--require('lspconfig')['rust_analyzer'].setup{
+--	on_attach = rust_on_attach,
+--	capabilities = capabilities,
+--	flags = lsp_flags,
+--	-- Server-specific settings...
+--	settings = {
+--		["rust-analyzer"] = {
+--			imports = {
+--				granularity = {
+--					group = "module",
+--				},
+--				prefix = "self",
+--			},
+--			cargo = {
+--				buildScripts = {
+--					enable = true,
+--				},
+--			},
+--			procMacro = {
+--				enable = true
+--			},
+--		}
+--	}
+--}
+require('lspconfig')['gdscript'].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	flags = lsp_flags,
+}

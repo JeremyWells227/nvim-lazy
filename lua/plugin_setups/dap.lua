@@ -23,3 +23,21 @@ dap.configurations.typescriptreact = { -- change to typescript if needed
 require('dapui').setup()
 
 require('dap-python').setup('/usr/bin/env python')
+
+local dap = require('dap')
+dap.adapters.godot = {
+  type = "server",
+  host = '127.0.0.1',
+  port = 6006,
+}
+
+dap.configurations.gdscript = {
+  {
+    type = "godot",
+    request = "launch",
+    name = "Launch scene",
+    project = "${workspaceFolder}",
+    launch_scene = true,
+  }
+}
+

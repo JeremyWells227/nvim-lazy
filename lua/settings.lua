@@ -2,7 +2,7 @@ HOME = os.getenv("HOME")
 
 vim.g.mapleader = ' '
 vim.opt.backspace = "indent,eol,start"
-vim.opt.completeopt = "menuone,noselect"
+vim.opt.completeopt = "menuone,noselect,noinsert"
 
 vim.o.startofline=true
 
@@ -38,8 +38,8 @@ vim.opt.shortmess=vim.opt.shortmess+"c"
 vim.opt.showtabline=2
 vim.opt.incsearch=true
 vim.opt.mps = vim.o.mps .. ",<:>"
-vim.g.python3_host_prog = '/usr/bin/python3'
-vim.g.python_host_prog  = '/usr/bin/python'
+vim.g.python3_host_prog = '/usr/bin/env python3'
+vim.g.python_host_prog  = '/usr/bin/env python'
 vim.diagnostic.config{
 	underline=false
 }

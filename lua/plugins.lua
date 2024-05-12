@@ -7,8 +7,7 @@ require("lazy").setup({
   event = "VeryLazy",
   config = function()
     vim.o.timeout = true
-    vim.o.timeoutlen = 300
-		require('which-key').setup()
+    vim.o.timeoutlen = 300 require('which-key').setup()
   end
 	},
 	{ "folke/neoconf.nvim", cmd = "Neoconf", lazy=false,
@@ -18,6 +17,16 @@ require("lazy").setup({
 	end},
 	"folke/neodev.nvim",
 	'preservim/nerdtree',
+	{'lewis6991/gitsigns.nvim',
+	config = function()
+		require('gitsigns').setup()
+	end
+	},
+	{'stevearc/oil.nvim',
+  opts = {},
+  -- Optional dependencies
+  --dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	{
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true },
@@ -43,6 +52,7 @@ end
 'hrsh7th/cmp-path',
 'hrsh7th/cmp-cmdline',
 'hrsh7th/nvim-cmp',
+'simrat39/rust-tools.nvim',
 'ap/vim-css-color',
 'tpope/vim-surround',
 'mattn/emmet-vim',
@@ -87,12 +97,63 @@ end
 	end
 	},
 'stevearc/dressing.nvim',
+{
+{
+    "kawre/leetcode.nvim",
+    build = ":TSUpdate html",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim",
+        "nvim-lua/plenary.nvim", -- required by telescope
+        "MunifTanjim/nui.nvim",
+
+        -- optional
+        "rcarriga/nvim-notify",
+    },
+    opts = {
+        -- configuration goes here
+		---@type lc.domain
+    domain = "com", -- For now "com" is the only one supported
+
+    ---@type string
+    arg = "leetcode.nvim",
+		---@type lc.lang
+    lang = "python",
+
+    ---@type lc.sql
+    sql = "mysql",
+
+    ---@type string
+    directory = vim.fn.stdpath("data") .. "/leetcode/",
+
+    ---@type boolean
+    logging = true,
+
+    console = {
+        ---@type boolean
+        open_on_runcode = true,
+
+        size = {
+            width = "75%", ---@type string | integer
+            height = "75%", ---@type string | integer
+        },
+        dir = "row", ---@type "col" | "row"
+    },
+
+    description = {
+        width = "40%", ---@type string | integer
+    },
+    },
+}
+},
+
 {'mfussenegger/nvim-dap', config=function()
 	require('plugin_setups/dap')
 end
 },
 'rcarriga/nvim-dap-ui',
 'mfussenegger/nvim-dap-python',
+'nvim-neotest/nvim-nio',
 { 
 	'RaafatTurki/corn.nvim',
 	config = function()
@@ -114,4 +175,11 @@ end
 			})
 		end
 },
+{
+	'habamax/vim-godot', 
+},
+{'donRaphaco/neotex',
+  ft='tex' ,
+}
+
 })
