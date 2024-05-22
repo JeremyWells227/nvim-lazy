@@ -58,6 +58,11 @@ require('lspconfig').cssls.setup{
 	capabilities = capabilities,
 	flags = lsp_flags,
 }
+require('lspconfig')["tailwindcss"].setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+	flags = lsp_flags,
+}
 require('lspconfig')['lua_ls'].setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
