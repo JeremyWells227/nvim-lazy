@@ -30,7 +30,7 @@ nmap( "<c-j>", "<C-w>j")
 nmap( "<c-k>", "<C-w>k")
 nmap( "<c-l>", "<C-w>l")
 
-nmap( "<C-n>" ,"<cmd>NERDTreeToggle<CR>")
+nmap( "<C-n>" ,"<cmd>NvimTreeToggle<CR>")
 nmap( "<C-p>", ":Telescope find_files<CR>")
 nmap( "<C-t>", ":Telescope tags<CR>")
 nmap( "<leader>fg", ":Telescope live_grep<CR>")
@@ -38,6 +38,7 @@ nmap("<leader>bp", ":lua require(\"dap\").toggle_breakpoint()<CR>")
 nmap("<leader>dc", ":lua require(\"dap\").continue()<CR>")
 nmap("<leader>so", ":lua require(\"dap\").step_over()<CR>")
 nmap("<leader>si", ":lua require(\"dap\").step_into()<CR>")
+nmap("<Leader>nf", ":lua require('neogen').generate()<CR>", opts)
 
 
 
