@@ -22,17 +22,6 @@ require("lazy").setup({
 	"folke/neodev.nvim",
 	--'preservim/nerdtree',
 	{
-		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		lazy = false,
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("nvim-tree").setup {}
-		end,
-	},
-	{
 		"danymat/neogen",
 		config = true,
 		-- Uncomment next line if you want to follow only stable versions

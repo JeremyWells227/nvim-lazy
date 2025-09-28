@@ -42,28 +42,28 @@ local lsp_flags = {
 	-- This is the default in Nvim 0.7+
 	debounce_text_changes = 150,
 }
-require('lspconfig')['pyright'].setup{
+vim.lsp.config['pyright'] = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
 }
-require('lspconfig')['tsserver'].setup{
+vim.lsp.config['ts_ls'] = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
 
 }
-require('lspconfig').cssls.setup{
+vim.lsp.config['cssls'] = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
 }
-require('lspconfig')["tailwindcss"].setup{
+vim.lsp.config["tailwindcss"] = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
 }
-require('lspconfig')['lua_ls'].setup({
+vim.lsp.config['lua_ls'] = ({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
@@ -97,7 +97,7 @@ require('lspconfig')['lua_ls'].setup({
 	end
 }
 )
-require('lspconfig')['marksman'].setup{
+vim.lsp.config['marksman'] = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
@@ -109,7 +109,7 @@ local rust_on_attach = function(client,bufnr)
 	vim.keymap.set("n", "<leader>ha", rt.hover_actions.hover_actions, bufopts)
 	vim.keymap.set("n", "<leader>hg", rt.code_action_group.code_action_group, bufopts)
 end
-rt.setup{
+rt = {
 	tools={
 		hover_actions= {
 			auto_focus=true,
@@ -139,7 +139,7 @@ rt.setup{
 			}
 	}
 }
---require('lspconfig')['rust_analyzer'].setup{
+--vim.lsp.config['rust_analyzer'] = {
 --	on_attach = rust_on_attach,
 --	capabilities = capabilities,
 --	flags = lsp_flags,
@@ -163,7 +163,7 @@ rt.setup{
 --		}
 --	}
 --}
-require('lspconfig')['gdscript'].setup{
+vim.lsp.config['gdscript'] = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	flags = lsp_flags,
