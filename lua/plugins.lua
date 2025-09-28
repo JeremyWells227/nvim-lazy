@@ -200,6 +200,6 @@ require("lazy").setup({
 	{
 		'donRaphaco/neotex',
 		ft = 'tex',
-	}
-
+	},
+	{ 'elkowar/yuck.vim' }
 })
